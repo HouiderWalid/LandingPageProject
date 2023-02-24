@@ -47,7 +47,7 @@ if ($config._app) {
   __webpack_public_path__ = urlJoin($config._app.cdnURL, $config._app.assetsPath)
 }
 
-Object.assign(Vue.config, {"silent":true,"performance":false})
+Object.assign(Vue.config, {"productionTip":false,"silent":true,"performance":false})
 
 const errorHandler = Vue.config.errorHandler || console.error
 
