@@ -9477,20 +9477,17 @@ var framework = __webpack_require__(17);
 // CONCATENATED MODULE: ./.nuxt/vuetify/options.js
 /* harmony default export */ var vuetify_options = ({
   "theme": {
-    "dark": true,
+    "light": true,
     "themes": {
-      "light": true,
-      "themes": {
-        "light": {
-          "primary": "#252733",
-          "secondary": "#0073c0",
-          "accent": "#82B1FF",
-          "error": "#FF5252",
-          "info": "#2196F3",
-          "success": "#4CAF50",
-          "warning": "#FFC107",
-          "danger": "#FF5252"
-        }
+      "light": {
+        "primary": "#252733",
+        "secondary": "#0073c0",
+        "accent": "#82B1FF",
+        "error": "#FF5252",
+        "info": "#2196F3",
+        "success": "#4CAF50",
+        "warning": "#FFC107",
+        "danger": "#FF5252"
       }
     }
   }
