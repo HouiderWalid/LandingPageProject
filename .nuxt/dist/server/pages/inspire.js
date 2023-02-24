@@ -1,68 +1,7 @@
 exports.ids = [5];
 exports.modules = {
 
-/***/ 101:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-// ESM COMPAT FLAG
-__webpack_require__.r(__webpack_exports__);
-
-// EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VGrid/VCol.js
-var VCol = __webpack_require__(97);
-
-// EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VGrid/VRow.js
-var VRow = __webpack_require__(96);
-
-// CONCATENATED MODULE: ./node_modules/vuetify-loader/lib/loader.js??ref--4!./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--7!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/inspire.vue?vue&type=template&id=d8189a06&
-
-
-
-var inspirevue_type_template_id_d8189a06_render = function render() {
-  var _vm = this,
-    _c = _vm._self._c;
-  return _c(VRow["a" /* default */], [_c(VCol["a" /* default */], {
-    staticClass: "text-center"
-  }, [_c('img', {
-    staticClass: "mb-5",
-    attrs: {
-      "src": "/v.png",
-      "alt": "Vuetify.js"
-    }
-  }), _vm._v(" "), _c('blockquote', {
-    staticClass: "blockquote"
-  }, [_vm._v("\n      “First, solve the problem. Then, write the code.”\n      "), _c('footer', [_c('small', [_c('em', [_vm._v("—John Johnson")])])])])])], 1);
-};
-var staticRenderFns = [];
-
-// CONCATENATED MODULE: ./pages/inspire.vue?vue&type=template&id=d8189a06&
-
-// EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
-var componentNormalizer = __webpack_require__(13);
-
-// CONCATENATED MODULE: ./pages/inspire.vue
-
-var script = {}
-
-
-/* normalize component */
-
-var component = Object(componentNormalizer["a" /* default */])(
-  script,
-  inspirevue_type_template_id_d8189a06_render,
-  staticRenderFns,
-  false,
-  null,
-  null,
-  "e2a6bfb0"
-  
-)
-
-/* harmony default export */ var inspire = __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
-/***/ 96:
+/***/ 92:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -236,7 +175,7 @@ const cache = new Map();
 
 /***/ }),
 
-/***/ 97:
+/***/ 93:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -412,6 +351,61 @@ const cache = new Map();
     }), children);
   }
 }));
+
+/***/ }),
+
+/***/ 99:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+// ESM COMPAT FLAG
+__webpack_require__.r(__webpack_exports__);
+
+// EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VGrid/VCol.js
+var VCol = __webpack_require__(93);
+
+// EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VGrid/VRow.js
+var VRow = __webpack_require__(92);
+
+// CONCATENATED MODULE: ./node_modules/vuetify-loader/lib/loader.js??ref--4!./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--7!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/inspire.vue?vue&type=template&id=8d4659ac&
+
+
+
+var inspirevue_type_template_id_8d4659ac_render = function render() {
+  var _vm = this,
+    _c = _vm._self._c;
+  return _c(VRow["a" /* default */], [_c(VCol["a" /* default */], {
+    staticClass: "text-center"
+  }, [_c('blockquote', {
+    staticClass: "blockquote"
+  }, [_vm._v("\n        “First, solve the problem. Then, write the code.”\n        "), _c('footer', [_c('small', [_c('em', [_vm._v("—John Johnson")])])])])])], 1);
+};
+var staticRenderFns = [];
+
+// CONCATENATED MODULE: ./pages/inspire.vue?vue&type=template&id=8d4659ac&
+
+// EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
+var componentNormalizer = __webpack_require__(13);
+
+// CONCATENATED MODULE: ./pages/inspire.vue
+
+var script = {}
+
+
+/* normalize component */
+
+var component = Object(componentNormalizer["a" /* default */])(
+  script,
+  inspirevue_type_template_id_8d4659ac_render,
+  staticRenderFns,
+  false,
+  null,
+  null,
+  "e2a6bfb0"
+  
+)
+
+/* harmony default export */ var inspire = __webpack_exports__["default"] = (component.exports);
 
 /***/ })
 
