@@ -1,8 +1,6 @@
 {
   "entry": "server.js",
   "files": {
-    "components/delay-hydration.js": "components/delay-hydration.js",
-    "components/hydration-status.js": "components/hydration-status.js",
     "components/nuxt-logo.js": "components/nuxt-logo.js",
     "components/tutorial.js": "components/tutorial.js",
     "components/vuetify-logo.js": "components/vuetify-logo.js",
@@ -11,8 +9,6 @@
     "server.js": "server.js"
   },
   "maps": {
-    "components/delay-hydration.js": "components/delay-hydration.js.map",
-    "components/hydration-status.js": "components/hydration-status.js.map",
     "components/nuxt-logo.js": "components/nuxt-logo.js.map",
     "components/tutorial.js": "components/tutorial.js.map",
     "components/vuetify-logo.js": "components/vuetify-logo.js.map",
