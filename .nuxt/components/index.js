@@ -1,3 +1,5 @@
+export const DelayHydration = () => import('../..\\node_modules\\nuxt-delay-hydration\\dist\\runtime\\components\\DelayHydration.vue' /* webpackChunkName: "components/delay-hydration" */).then(c => wrapFunctional(c.default || c))
+export const HydrationStatus = () => import('../..\\node_modules\\nuxt-delay-hydration\\dist\\runtime\\components\\HydrationStatus.vue' /* webpackChunkName: "components/hydration-status" */).then(c => wrapFunctional(c.default || c))
 export const NuxtLogo = () => import('../..\\components\\NuxtLogo.vue' /* webpackChunkName: "components/nuxt-logo" */).then(c => wrapFunctional(c.default || c))
 export const Tutorial = () => import('../..\\components\\Tutorial.vue' /* webpackChunkName: "components/tutorial" */).then(c => wrapFunctional(c.default || c))
 export const VuetifyLogo = () => import('../..\\components\\VuetifyLogo.vue' /* webpackChunkName: "components/vuetify-logo" */).then(c => wrapFunctional(c.default || c))

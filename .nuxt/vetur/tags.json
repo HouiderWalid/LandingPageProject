@@ -1,4 +1,10 @@
 {
+  "DelayHydration": {
+    "description": "Auto imported from node_modules/nuxt-delay-hydration/dist/runtime/components/DelayHydration.vue"
+  },
+  "HydrationStatus": {
+    "description": "Auto imported from node_modules/nuxt-delay-hydration/dist/runtime/components/HydrationStatus.vue"
+  },
   "NuxtLogo": {
     "description": "Auto imported from components/NuxtLogo.vue"
   },

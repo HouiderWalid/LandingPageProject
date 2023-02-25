@@ -16,6 +16,6 @@
   },
   "devDependencies": {
     "@nuxtjs/vuetify": "^1.12.1",
-    "nuxt-delay-hydration": "^1.1.4"
+    "nuxt-delay-hydration": "^0.4.5"
   }
 }
