@@ -6,8 +6,9 @@
           <BurgerButton v-model="Toggle" class="burger-button absolute"
                         style="left: -140px; top: 15px; display: none"/>
           <a class="d-flex align-items-center" href="/">
-            <McnImage :image="domainLogoImage" :src="domainLogoImageUrl" height="50px" image-max-width="150px"
-                      image-radius width="170px"/>
+            <nuxt-img src="/mcn_header_logo.png" height="50px" width="170px" preload></nuxt-img>
+<!--            <McnImage :image="domainLogoImage" :src="domainLogoImageUrl" height="50px" image-max-width="150px"
+                      image-radius width="170px"/>-->
           </a>
         </div>
         <v-row :style="toggleStyle" align="center" class="mcn-menu flex-grow-0 overflow-hidden" justify="center"
