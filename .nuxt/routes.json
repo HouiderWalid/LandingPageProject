@@ -1,12 +1,5 @@
 [
   {
-    "name": "inspire",
-    "path": "/inspire",
-    "component": "C:\\\\Users\\\\houid\\\\McnWork\\\\LandingPageProject\\\\pages\\\\inspire.vue",
-    "chunkName": "pages/inspire",
-    "_name": "_cfdc75c8"
-  },
-  {
     "name": "index",
     "path": "/",
     "component": "C:\\\\Users\\\\houid\\\\McnWork\\\\LandingPageProject\\\\pages\\\\index.vue",

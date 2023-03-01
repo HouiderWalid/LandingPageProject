@@ -1,118 +1,106 @@
 <template>
-  <v-app>
-    <v-navigation-drawer
-      v-model="drawer"
-      :mini-variant="miniVariant"
-      :clipped="clipped"
-      fixed
-      app
-    >
-      <v-list>
-        <v-list-item
-          v-for="(item, i) in items"
-          :key="i"
-          :to="item.to"
-          router
-          exact
-        >
-          <v-list-item-action>
-            <v-icon>{{ item.icon }}</v-icon>
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title v-text="item.title" />
-          </v-list-item-content>
-        </v-list-item>
-      </v-list>
-    </v-navigation-drawer>
-    <v-app-bar
-      :clipped-left="clipped"
-      fixed
-      app
-    >
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
-      <v-btn
-        icon
-        @click.stop="miniVariant = !miniVariant"
-      >
-        <v-icon>mdi-{{ `chevron-${miniVariant ? 'right' : 'left'}` }}</v-icon>
-      </v-btn>
-      <v-btn
-        icon
-        @click.stop="clipped = !clipped"
-      >
-        <v-icon>mdi-application</v-icon>
-      </v-btn>
-      <v-btn
-        icon
-        @click.stop="fixed = !fixed"
-      >
-        <v-icon>mdi-minus</v-icon>
-      </v-btn>
-      <v-toolbar-title v-text="title" />
-      <v-spacer />
-      <v-btn
-        icon
-        @click.stop="rightDrawer = !rightDrawer"
-      >
-        <v-icon>mdi-menu</v-icon>
-      </v-btn>
-    </v-app-bar>
-    <v-main>
-      <v-container>
-        <Nuxt />
-      </v-container>
-    </v-main>
-    <v-navigation-drawer
-      v-model="rightDrawer"
-      :right="right"
-      temporary
-      fixed
-    >
-      <v-list>
-        <v-list-item @click.native="right = !right">
-          <v-list-item-action>
-            <v-icon light>
-              mdi-repeat
-            </v-icon>
-          </v-list-item-action>
-          <v-list-item-title>Switch drawer (click me)</v-list-item-title>
-        </v-list-item>
-      </v-list>
-    </v-navigation-drawer>
-    <v-footer
-      :absolute="!fixed"
-      app
-    >
-      <span>&copy; {{ new Date().getFullYear() }}</span>
-    </v-footer>
+  <v-app :style="{ '--d-secondary-color': secondaryColor, '--d-primary-color': conicBgColor }"
+         class="position-relative" style="min-height: 100vh; background-color: rgb(246, 246, 246)">
+
+    <McnHeader></McnHeader>
+
+    <!-- dont remove the min-height here -->
+    <div v-if="isHydrated" class="flex-grow-1" style="min-height: 1px">
+      <Nuxt :key="$route.fullPath"/>
+    </div>
+
   </v-app>
-<!--  <div>default</div>-->
 </template>
 
 <script>
+import McnHeader from "../components/McnHeader";
+import {hexToRgb} from "../assets/js/mcn-helpers";
+
 export default {
-  data () {
+  components: {
+    McnHeader
+  },
+  head() {
     return {
-      clipped: false,
-      drawer: false,
-      fixed: false,
-      items: [
+      meta: [
         {
-          icon: 'mdi-apps',
-          title: 'Welcome',
-          to: '/'
+          name: 'google-site-verification',
+          content: this.domainGoogleVerificationString
         },
         {
-          icon: 'mdi-chart-bubble',
-          title: 'Inspire',
-          to: '/inspire'
-        }
+          name: 'facebook-domain-verification',
+          content: this.domainFacebookVerificationString
+        },
       ],
-      miniVariant: false,
-      right: true,
-      rightDrawer: false,
-      title: 'Vuetify.js'
+      link: [
+        {
+          rel: 'icon',
+          type: 'image/x-icon',
+          href: this.getFaviconUrl
+        }
+      ]
     }
+  },
+  data() {
+    return {
+      isHydrated: false,
+      McnFavicon: require('~/assets/img/mcn-logo.png'),
+    }
+  },
+  computed: {
+    domain() {
+      return this.$store.getters["salePage/getDomain"]
+    },
+    primaryColor() {
+      return this.domain?.DomainPrimaryColor.content ?? '#0073c0'
+    },
+    secondaryColor() {
+      return this.domain?.DomainSecondaryColor?.content ?? '#0073c0'
+    },
+    domainGoogleVerificationString() {
+      return this.domain?.DomainGoogleVerificationString?.content ?? null
+    },
+    domainFacebookVerificationString() {
+      return this.domain?.DomainFacebookVerificationString?.content ?? null
+    },
+    conicBgColor() {
+      return Object.values(this.hexToRgb(this.primaryColor)).join()
+    },
+    getFaviconUrl() {
+      return this.getFavicon?.ImageUrl?.content ?? this.domain?.DomainFavicon?.content ?? this.McnFavicon
+    },
+    getFavicon() {
+      return this.domain?.DomainFaviconGallery?.content
+    }
+  },
+  methods: {
+    hexToRgb
+  },
+  mounted() {
+    this.isHydrated = true
   }
 }
 </script>
+<style lang="scss">
+:root {
+  --app-color: #252733;
+  --app-secondary-color: #0073c0;
+}
+
+.bg-bluish {
+  background: conic-gradient(from 90deg at 0 0, rgb(var(--my-color)) 0deg, rgba(var(--my-color), 1) 0deg, rgba(var(--my-color), 0) 360deg);
+}
+
+html {
+  overflow: auto !important;
+
+  & * {
+    word-break: keep-all;
+  }
+}
+
+* {
+  font-family: 'Tajawal', sans-serif !important;
+  word-break: break-word !important;
+}
+</style>

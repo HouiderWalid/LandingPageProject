@@ -21,7 +21,7 @@ export default {
       {name: 'format-detection', content: 'telephone=no'}
     ],
     link: [
-      {rel: 'icon', type: 'image/x-icon', href: '/favicon.ico'}
+      //{rel: 'icon', type: 'image/x-icon', href: '/favicon.ico'}
     ]
   },
 
@@ -32,22 +32,57 @@ export default {
   plugins: [],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
-  components: true,
+  components: false,
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
     // https://go.nuxtjs.dev/vuetify
-    //'@nuxtjs/vuetify'
+    '@nuxtjs/vuetify',
+    '@nuxtjs/google-fonts'
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     // https://go.nuxtjs.dev/axios
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    '@nuxtjs/i18n'
   ],
 
-  // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  axios: {},
+  i18n: {
+    locales: [
+      {
+        code: 'en',
+        iso: 'en-US',
+        dir: 'ltr',
+        file: 'en-US.js',
+        cr: [
+          "AS", "AI", "AG", "AU", "BS", "BB", "BZ", "BM", "BW", "IO", "CM",
+          "CA", "KY", "CX", "CC", "CK", "DM", "ER", "FK", "FJ", "GM", "GH", "GI", "GD", "GU", "GG", "GY", "HK", "IN",
+          "IE", "IM", "JM", "JE", "KE", "KI", "LS", "LR", "MW", "MT", "MH", "MU", "FM", "MS", "NA", "NR", "NZ", "NG",
+          "NU", "NF", "MP", "PK", "PW", "PG", "PH", "PN", "PR", "RW", "SH", "KN", "LC", "MF", "VC", "WS", "SC", "SL",
+          "SG", "SB", "ZA", "GS", "SD", "SZ", "TZ", "TK", "TO", "TT", "TC", "TV", "UG", "GB", "US", "VU", "VG", "VI",
+          "ZM", "ZW"
+        ]
+      }
+    ],
+    strategy: 'no_prefix',
+    defaultLocale: 'en',
+    vueI18n: {
+      silentTranslationWarn: true,
+      silentFallbackWarn: true,
+      fallbackLocale: 'en',
+      lazy: true,
+      langDir: 'lang/main/'
+      //messages: Translations
+    },
+  },
+
+  googleFonts: {
+    display: 'swap',
+    families: {
+      Tajawal: [200, 300, 400, 500, 700, 800, 900]
+    }
+  },
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
