@@ -16,6 +16,8 @@
 import McnHeader from "../components/McnHeader";
 import {hexToRgb} from "../assets/js/mcn-helpers";
 
+let mcnFavicon = require('~/assets/img/favicon.png')
+
 export default {
   components: {
     McnHeader
@@ -43,8 +45,7 @@ export default {
   },
   data() {
     return {
-      isHydrated: false,
-      McnFavicon: require('~/assets/img/mcn-logo.png'),
+      isHydrated: false
     }
   },
   computed: {
@@ -67,7 +68,7 @@ export default {
       return Object.values(this.hexToRgb(this.primaryColor)).join()
     },
     getFaviconUrl() {
-      return this.getFavicon?.ImageUrl?.content ?? this.domain?.DomainFavicon?.content ?? this.McnFavicon
+      return this.getFavicon?.ImageUrl?.content ?? this.domain?.DomainFavicon?.content ?? mcnFavicon
     },
     getFavicon() {
       return this.domain?.DomainFaviconGallery?.content
