@@ -6,9 +6,9 @@
           <BurgerButton v-model="Toggle" class="burger-button absolute"
                         style="left: -140px; top: 15px; display: none"/>
           <a class="d-flex align-items-center" href="/">
-            <nuxt-img src="/mcn_header_logo.png" height="50px" width="170px" preload></nuxt-img>
-<!--            <McnImage :image="domainLogoImage" :src="domainLogoImageUrl" height="50px" image-max-width="150px"
-                      image-radius width="170px"/>-->
+            <!--            <CustomNuxtImg/>-->
+            <nuxt-img background="white" fit="contain" height="50" preload preload src="/mcn_header_logo.webp"
+                      width="241"/>
           </a>
         </div>
         <v-row :style="toggleStyle" align="center" class="mcn-menu flex-grow-0 overflow-hidden" justify="center"
@@ -27,12 +27,13 @@
 <script>
 import BurgerButton from "./inputs/BurgerButton";
 import McnImage from "./regular-components/McnImage";
+import CustomNuxtImg from "./regular-components/CustomNuxtImg";
 
 let mcnHeaderLogo = require('~/assets/img/mcn_header_logo.png')
 
 export default {
   name: "McnHeader",
-  components: {McnImage, BurgerButton},
+  components: {McnImage, BurgerButton, CustomNuxtImg},
   data() {
     return {
       Toggle: false,
@@ -73,7 +74,7 @@ export default {
     },
   },
   methods: {
-    routeDestination(link){
+    routeDestination(link) {
       return link.url === '/' ? this.localePath(link.url) : (this.localePath(link.url) + this.$route.query)
     }
   },
