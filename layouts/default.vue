@@ -5,7 +5,7 @@
     <McnHeader></McnHeader>
 
     <!-- dont remove the min-height here -->
-    <div v-if="isHydrated" class="flex-grow-1" style="min-height: 1px">
+    <div class="flex-grow-1" style="min-height: 1px">
       <Nuxt :key="$route.fullPath"/>
     </div>
 

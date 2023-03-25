@@ -31,7 +31,11 @@ export default {
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [],
+  plugins: [
+    '~/plugins/persistedState.js',
+    '~/plugins/axios',
+    '~/plugins/youtube-light.client.js'
+  ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: false,
@@ -39,7 +43,7 @@ export default {
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
     // https://go.nuxtjs.dev/vuetify
-    '@nuxtjs/vuetify',
+    //'@nuxtjs/vuetify',
     '@nuxtjs/google-fonts'
   ],
 
