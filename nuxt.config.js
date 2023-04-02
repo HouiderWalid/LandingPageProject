@@ -41,7 +41,7 @@ export default {
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
     // https://go.nuxtjs.dev/vuetify
-    //'@nuxtjs/vuetify',
+    '@nuxtjs/vuetify',
     //'@nuxtjs/google-fonts',
     //'@nuxtjs/axios',
     //'@nuxtjs/i18n'
@@ -50,7 +50,6 @@ export default {
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     // https://go.nuxtjs.dev/axios
-
   ],
 
   // googleFonts: {
@@ -65,7 +64,8 @@ export default {
     customVariables: ['~/assets/variables.scss'],
     treeShake: true,
     theme: {
-      light: true,
+      dark: false,
+      options: { variations: false },
       themes: {
         light: {
           primary: '#252733',
