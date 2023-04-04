@@ -43,13 +43,13 @@ export default {
     // https://go.nuxtjs.dev/vuetify
     '@nuxtjs/vuetify',
     //'@nuxtjs/google-fonts',
-    //'@nuxtjs/axios',
-    //'@nuxtjs/i18n'
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     // https://go.nuxtjs.dev/axios
+    '@nuxtjs/axios',
+    '@nuxtjs/i18n'
   ],
 
   // googleFonts: {
