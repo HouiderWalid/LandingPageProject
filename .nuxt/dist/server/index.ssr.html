@@ -1,9 +1,10 @@
 <!doctype html>
 <html {{ html_attrs }}>
-  <head {{ head_attrs }}>
-    {{ HEAD }}
-  </head>
-  <body {{ body_attrs }}>
-    {{ APP }}
-  </body>
+<head {{ head_attrs }}>
+  {{ HEAD.replace(new RegExp('<link rel="preload" href="/_nuxt/([a-f0-9]{7})\.js" as="script">', 'g'), '') }}
+</head>
+<body {{ body_attrs }}>
+{{ APP.replace(new RegExp('script src="/_nuxt/([a-f0-9]{7})\.js"', 'g'), 'script lazy-src="/_nuxt/$1.js"') }}
+<script type="text/javascript">const lazyLoadTimeout=2500,userInteractionEvents=["mouseover","keydown","touchstart","touchmove","wheel"],loadScriptsTimer=setTimeout(loadScripts,2500);function loadScripts(){Array.from(document.querySelectorAll("script[lazy-src='lazy']")).forEach((function(t){t.setAttribute("src",t.getAttribute("lazy-src")),t.removeAttribute("lazy-src")}))}function triggerScriptLoader(){loadScripts(),clearTimeout(loadScriptsTimer),userInteractionEvents.forEach((function(t){window.removeEventListener(t,triggerScriptLoader,{passive:!0})}))}userInteractionEvents.forEach((function(t){window.addEventListener(t,triggerScriptLoader,{passive:!0})}))</script>
+</body>
 </html>
