@@ -1,18 +1,18 @@
 exports.ids = [1];
 exports.modules = {
 
-/***/ 78:
+/***/ 77:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var _VBtn__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(79);
+/* harmony import */ var _VBtn__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(78);
 
 
 /* harmony default export */ __webpack_exports__["a"] = (_VBtn__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"]);
 
 /***/ }),
 
-/***/ 88:
+/***/ 85:
 /***/ (function(module, exports) {
 
 // Exports
@@ -23,7 +23,7 @@ module.exports = {
 
 /***/ }),
 
-/***/ 89:
+/***/ 86:
 /***/ (function(module, exports) {
 
 // Exports
@@ -34,7 +34,18 @@ module.exports = {
 
 /***/ }),
 
-/***/ 91:
+/***/ 87:
+/***/ (function(module, exports) {
+
+// Exports
+module.exports = {
+
+};
+
+
+/***/ }),
+
+/***/ 90:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -42,28 +53,28 @@ module.exports = {
 __webpack_require__.r(__webpack_exports__);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/src/components/VAlert/VAlert.sass
-var VAlert = __webpack_require__(88);
+var VAlert = __webpack_require__(86);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VSheet/index.js + 3 modules
-var VSheet = __webpack_require__(15);
+var VSheet = __webpack_require__(14);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VBtn/index.js
-var VBtn = __webpack_require__(78);
+var VBtn = __webpack_require__(77);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/src/components/VIcon/VIcon.sass
-var VIcon = __webpack_require__(89);
+var VIcon = __webpack_require__(87);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/mixins/binds-attrs/index.js
 var binds_attrs = __webpack_require__(32);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/mixins/colorable/index.js
-var colorable = __webpack_require__(14);
+var colorable = __webpack_require__(13);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/mixins/sizeable/index.js
 var sizeable = __webpack_require__(46);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/mixins/themeable/index.js
-var themeable = __webpack_require__(13);
+var themeable = __webpack_require__(21);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/util/helpers.js
 var helpers = __webpack_require__(2);
@@ -501,9 +512,64 @@ var console = __webpack_require__(3);
     }, [render]);
   }
 }));
-// EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VApp/VApp.js
-var VApp = __webpack_require__(86);
+// EXTERNAL MODULE: ./node_modules/vuetify/src/components/VApp/VApp.sass
+var VApp = __webpack_require__(85);
 
+// CONCATENATED MODULE: ./node_modules/vuetify/lib/components/VApp/VApp.js
+// Styles
+ // Mixins
+
+ // Utilities
+
+
+/* @vue/component */
+
+/* harmony default export */ var VApp_VApp = (Object(mixins["a" /* default */])(themeable["a" /* default */]).extend({
+  name: 'v-app',
+  props: {
+    dark: {
+      type: Boolean,
+      default: undefined
+    },
+    id: {
+      type: String,
+      default: 'app'
+    },
+    light: {
+      type: Boolean,
+      default: undefined
+    }
+  },
+  computed: {
+    isDark() {
+      return this.$vuetify.theme.dark;
+    }
+  },
+  beforeCreate() {
+    if (!this.$vuetify || this.$vuetify === this.$root) {
+      throw new Error('Vuetify is not properly initialized, see https://vuetifyjs.com/getting-started/quick-start#bootstrapping-the-vuetify-object');
+    }
+  },
+  render(h) {
+    const wrapper = h('div', {
+      staticClass: 'v-application--wrap'
+    }, this.$slots.default);
+    return h('div', {
+      staticClass: 'v-application',
+      class: {
+        'v-application--is-rtl': this.$vuetify.rtl,
+        'v-application--is-ltr': !this.$vuetify.rtl,
+        ...this.themeClasses
+      },
+      attrs: {
+        'data-app': true
+      },
+      domProps: {
+        id: this.id
+      }
+    }, [wrapper]);
+  }
+}));
 // CONCATENATED MODULE: ./node_modules/vuetify-loader/lib/loader.js??ref--4!./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--7!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/index.vue?vue&type=template&id=7f32a504&
 
 
@@ -511,7 +577,7 @@ var VApp = __webpack_require__(86);
 var lib_vue_loader_options_pagesvue_type_template_id_7f32a504_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _c(VApp["a" /* default */], [_vm._v("index\n  "), _c(VAlert_VAlert, {
+  return _c(VApp_VApp, [_vm._v("index\n  "), _c(VAlert_VAlert, {
     staticClass: "mx-4",
     attrs: {
       "type": "success",
@@ -525,7 +591,7 @@ var staticRenderFns = [];
 // CONCATENATED MODULE: ./pages/index.vue?vue&type=template&id=7f32a504&
 
 // EXTERNAL MODULE: external "@mdi/js"
-var js_ = __webpack_require__(81);
+var js_ = __webpack_require__(79);
 
 // CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/index.vue?vue&type=script&lang=js&
 

@@ -1,14 +1,15 @@
 <template>
-  <v-app :style="{ '--d-secondary-color': getSecondaryColor, '--d-primary-color': conicBgColor }"
+<!--  <v-app :style="{ '&#45;&#45;d-secondary-color': getSecondaryColor, '&#45;&#45;d-primary-color': conicBgColor }"
          class="position-relative" style="min-height: 100vh; background-color: rgb(246, 246, 246)">
 
-<!--    <McnHeader/>-->
+&lt;!&ndash;    <McnHeader/>&ndash;&gt;
 
     <div class="flex-grow-1" style="min-height: 1px">
       <Nuxt/>
     </div>
 
-  </v-app>
+  </v-app>-->
+  <Nuxt/>
 </template>
 
 <script>
