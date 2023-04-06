@@ -6721,10 +6721,7 @@ function getVariables(host_name = null) {
     headers: {
       "content-type": "application/json",
       "accept": "application/json"
-      //"content-type": "multipart/form-data",
-      //'X-CSRF-TOKEN': document.querySelector("meta[name='csrf-token']").content
     },
-
     responseType: "json"
   });
   inject('mcnApi', api);

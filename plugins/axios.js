@@ -8,9 +8,7 @@ export default function ({ $axios, req }, inject) {
     timeout: 60000,
     headers: {
       "content-type": "application/json",
-      "accept": "application/json",
-      //"content-type": "multipart/form-data",
-      //'X-CSRF-TOKEN': document.querySelector("meta[name='csrf-token']").content
+      "accept": "application/json"
     },
     responseType: "json",
   })
