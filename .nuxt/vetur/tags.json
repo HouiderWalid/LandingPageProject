@@ -1,1 +1,11 @@
-{}
+{
+  "McnHeader": {
+    "description": "Auto imported from components/McnHeader.vue"
+  },
+  "McnImage": {
+    "description": "Auto imported from components/McnImage.vue"
+  },
+  "InputsBurgerButton": {
+    "description": "Auto imported from components/inputs/BurgerButton.vue"
+  }
+}

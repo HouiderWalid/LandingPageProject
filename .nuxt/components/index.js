@@ -1,3 +1,7 @@
+export const McnHeader = () => import('../..\\components\\McnHeader.vue' /* webpackChunkName: "components/mcn-header" */).then(c => wrapFunctional(c.default || c))
+export const McnImage = () => import('../..\\components\\McnImage.vue' /* webpackChunkName: "components/mcn-image" */).then(c => wrapFunctional(c.default || c))
+export const InputsBurgerButton = () => import('../..\\components\\inputs\\BurgerButton.vue' /* webpackChunkName: "components/inputs-burger-button" */).then(c => wrapFunctional(c.default || c))
+
 // nuxt/nuxt.js#8607
 function wrapFunctional(options) {
   if (!options || !options.functional) {

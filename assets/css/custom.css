@@ -1,0 +1,302 @@
+.mcn-card-shadow{
+  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12) !important;
+}
+
+.block-border-shadow{
+  box-shadow: 0 3px 8px rgba(0, 0, 0, .08) !important;
+}
+
+.app-primary {
+  color: #252733 !important;
+}
+
+.ul-pad {
+  padding: 15px !important;
+}
+
+.no-letter-spacing {
+  letter-spacing: 0 !important;
+}
+
+.rtl-rotate {
+  rotate: 180deg;
+}
+
+.mcn-smooth-shadow{
+  box-shadow: 0 3px 8px rgba(0, 0, 0, .08) !important;
+}
+
+/** Margin **/
+
+.mis-0 {
+  margin-inline-start: 0 !important;
+}
+
+.mis-1 {
+  margin-inline-start: 4px !important;
+}
+
+.mis-2 {
+  margin-inline-start: 8px !important;
+}
+
+.mis-3 {
+  margin-inline-start: 12px !important;
+}
+
+.mis-4 {
+  margin-inline-start: 16px !important;
+}
+
+.mis-5 {
+  margin-inline-start: 20px !important;
+}
+
+.mis-6 {
+  margin-inline-start: 24px !important;
+}
+
+.mis-7 {
+  margin-inline-start: 28px !important;
+}
+
+.mis-8 {
+  margin-inline-start: 32px !important;
+}
+
+.mis-9 {
+  margin-inline-start: 36px !important;
+}
+
+.mis-10 {
+  margin-inline-start: 40px !important;
+}
+
+.mis-11 {
+  margin-inline-start: 44px !important;
+}
+
+.mis-12 {
+  margin-inline-start: 48px !important;
+}
+
+.mis-13 {
+  margin-inline-start: 52px !important;
+}
+
+.mis-14 {
+  margin-inline-start: 56px !important;
+}
+
+.mis-15 {
+  margin-inline-start: 60px !important;
+}
+
+.mis-16 {
+  margin-inline-start: 64px !important;
+}
+
+.mie-0 {
+  margin-inline-end: 0 !important;
+}
+
+.mie-1 {
+  margin-inline-end: 4px !important;
+}
+
+.mie-2 {
+  margin-inline-end: 8px !important;
+}
+
+.mie-3 {
+  margin-inline-end: 12px !important;
+}
+
+.mie-4 {
+  margin-inline-end: 16px !important;
+}
+
+.mie-5 {
+  margin-inline-end: 20px !important;
+}
+
+.mie-6 {
+  margin-inline-end: 24px !important;
+}
+
+.mie-7 {
+  margin-inline-end: 28px !important;
+}
+
+.mie-8 {
+  margin-inline-end: 32px !important;
+}
+
+.mie-9 {
+  margin-inline-end: 36px !important;
+}
+
+.mie-10 {
+  margin-inline-end: 40px !important;
+}
+
+.mie-11 {
+  margin-inline-end: 44px !important;
+}
+
+.mie-12 {
+  margin-inline-end: 48px !important;
+}
+
+.mie-13 {
+  margin-inline-end: 52px !important;
+}
+
+.mie-14 {
+  margin-inline-end: 56px !important;
+}
+
+.mie-15 {
+  margin-inline-end: 60px !important;
+}
+
+.mie-16 {
+  margin-inline-end: 64px !important;
+}
+
+.pis-0 {
+  padding-inline-start: 0 !important;
+}
+
+.pis-1 {
+  padding-inline-start: 4px !important;
+}
+
+.pis-2 {
+  padding-inline-start: 8px !important;
+}
+
+.pis-3 {
+  padding-inline-start: 12px !important;
+}
+
+.pis-4 {
+  padding-inline-start: 16px !important;
+}
+
+.pis-5 {
+  padding-inline-start: 20px !important;
+}
+
+.pis-6 {
+  padding-inline-start: 24px !important;
+}
+
+.pis-7 {
+  padding-inline-start: 28px !important;
+}
+
+.pis-8 {
+  padding-inline-start: 32px !important;
+}
+
+.pis-9 {
+  padding-inline-start: 36px !important;
+}
+
+.pis-10 {
+  padding-inline-start: 40px !important;
+}
+
+.pis-11 {
+  padding-inline-start: 44px !important;
+}
+
+.pis-12 {
+  padding-inline-start: 48px !important;
+}
+
+.pis-13 {
+  padding-inline-start: 52px !important;
+}
+
+.pis-14 {
+  padding-inline-start: 56px !important;
+}
+
+.pis-15 {
+  padding-inline-start: 60px !important;
+}
+
+.pis-16 {
+  padding-inline-start: 64px !important;
+}
+
+.pie-0 {
+  padding-inline-end: 0 !important;
+}
+
+.pie-1 {
+  padding-inline-end: 4px !important;
+}
+
+.pie-2 {
+  padding-inline-end: 8px !important;
+}
+
+.pie-3 {
+  padding-inline-end: 12px !important;
+}
+
+.pie-4 {
+  padding-inline-end: 16px !important;
+}
+
+.pie-5 {
+  padding-inline-end: 20px !important;
+}
+
+.pie-6 {
+  padding-inline-end: 24px !important;
+}
+
+.pie-7 {
+  padding-inline-end: 28px !important;
+}
+
+.pie-8 {
+  padding-inline-end: 32px !important;
+}
+
+.pie-9 {
+  padding-inline-end: 36px !important;
+}
+
+.pie-10 {
+  padding-inline-end: 40px !important;
+}
+
+.pie-11 {
+  padding-inline-end: 44px !important;
+}
+
+.pie-12 {
+  padding-inline-end: 48px !important;
+}
+
+.pie-13 {
+  padding-inline-end: 52px !important;
+}
+
+.pie-14 {
+  padding-inline-end: 56px !important;
+}
+
+.pie-15 {
+  padding-inline-end: 60px !important;
+}
+
+.pie-16 {
+  padding-inline-end: 64px !important;
+}
+
