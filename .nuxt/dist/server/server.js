@@ -115,7 +115,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 25);
+/******/ 	return __webpack_require__(__webpack_require__.s = 29);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -708,9 +708,9 @@ function composedPath(e) {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return createLocaleFromRouteGetter; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return getLocaleCookie; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "h", function() { return setLocaleCookie; });
-/* harmony import */ var cookie__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(15);
+/* harmony import */ var cookie__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(19);
 /* harmony import */ var cookie__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(cookie__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var js_cookie__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(30);
+/* harmony import */ var js_cookie__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(35);
 /* harmony import */ var js_cookie__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(js_cookie__WEBPACK_IMPORTED_MODULE_1__);
 
 
@@ -958,13 +958,58 @@ module.exports = require("ufo");
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return getType; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return serializeObject; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return isConstructor; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return isFunction; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return isObject; });
+const getType = v => Object.prototype.toString.call(v).slice(8, -1);
+const isObject = v => getType(v) === 'Object';
+const isFunction = v => getType(v) === 'Function';
+function serializeObject(data, Model, param = null) {
+  if (!data) return null;
+  if (!Model) return data;
+  let model = isFunction(Model) ? new Model(param) : Model;
+  if (data && model) {
+    Object.keys(model).forEach(key => {
+      if (data[model[key].fieldName] !== undefined) {
+        if (model[key].model || model[key].dynamicModel) {
+          if (Array.isArray(data[model[key].fieldName])) {
+            let dataArray = [];
+            data[model[key].fieldName].forEach(subObject => dataArray.push(serializeObject(subObject, isFunction(model[key].dynamicModel) ? model[key].dynamicModel(subObject) : model[key].model)));
+            model[key].content = dataArray;
+          } else if (isObject(data[model[key].fieldName])) model[key].content = serializeObject(data[model[key].fieldName], isFunction(model[key].dynamicModel) ? model[key].dynamicModel(data[model[key].fieldName]) : model[key].model);else model[key].content = data[model[key].fieldName];
+        } else if (model[key].type && model[key].type === 'json' && typeof data[model[key].fieldName] === 'string') {
+          model[key].content = JSON.parse(data[model[key].fieldName]);
+        } else model[key].content = data[model[key].fieldName];
+      }
+    });
+  }
+  return model;
+}
+function isConstructor(f) {
+  try {
+    new f();
+  } catch (err) {
+    // verify err is the expected error and then
+    return false;
+  }
+  return true;
+}
+
+
+/***/ }),
+/* 6 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
 /* unused harmony export consoleInfo */
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return consoleWarn; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return consoleError; });
 /* unused harmony export deprecate */
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return breaking; });
 /* unused harmony export removed */
-/* harmony import */ var _framework__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(11);
+/* harmony import */ var _framework__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(14);
 /* eslint-disable no-console */
 
 function createMessage(message, vm, parent) {
@@ -1050,7 +1095,7 @@ function generateComponentTrace(vm) {
 }
 
 /***/ }),
-/* 6 */
+/* 7 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1073,9 +1118,9 @@ function generateComponentTrace(vm) {
 /* unused harmony export parseGradient */
 /* unused harmony export RGBtoInt */
 /* unused harmony export contrastRatio */
-/* harmony import */ var _console__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(5);
+/* harmony import */ var _console__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(6);
 /* harmony import */ var _helpers__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(2);
-/* harmony import */ var _color_transformSRGB__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(7);
+/* harmony import */ var _color_transformSRGB__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(8);
 // Utilities
 
 
@@ -1296,7 +1341,7 @@ function contrastRatio(c1, c2) {
 }
 
 /***/ }),
-/* 7 */
+/* 8 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1339,7 +1384,7 @@ function toXYZ(rgb) {
 }
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1848,10 +1893,10 @@ exports.withoutBase = withoutBase;
 exports.withoutLeadingSlash = withoutLeadingSlash;
 exports.withoutProtocol = withoutProtocol;
 exports.withoutTrailingSlash = withoutTrailingSlash;
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(20)["URLSearchParams"]))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(16)["URLSearchParams"]))
 
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1955,13 +2000,80 @@ function normalizeComponent(
 
 
 /***/ }),
-/* 10 */
+/* 11 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+
+// EXPORTS
+__webpack_require__.d(__webpack_exports__, "a", function() { return /* binding */ Response_Response; });
+
+// EXTERNAL MODULE: ./assets/js/mcn-helpers.js
+var mcn_helpers = __webpack_require__(5);
+
+// CONCATENATED MODULE: ./assets/js/models/Model.js
+
+class Model_Model {
+  constructor() {}
+  static reInstantiate(oldModel, type) {
+    let Type = type !== null && type !== void 0 ? type : this;
+    if (!Object(mcn_helpers["d" /* isObject */])(oldModel) || !Object(mcn_helpers["b" /* isConstructor */])(Type)) return null;
+    let newModel = new Type();
+    Object.keys(newModel).forEach(newModelKey => {
+      var _oldModelField$conten;
+      let oldModelField = oldModel[newModelKey];
+      let newModelField = newModel[newModelKey];
+      if (!oldModelField || !newModelField) return;
+      let hasDynamicModel = Object(mcn_helpers["c" /* isFunction */])(newModelField.dynamicModel);
+      newModel[newModelKey].content = newModelField.model || hasDynamicModel ? Array.isArray(oldModelField.content) ? oldModelField.content.map(item => Model_Model.reInstantiate(item, hasDynamicModel ? newModelField.dynamicModel(item) : newModelField.model)) : Model_Model.reInstantiate(oldModelField.content, hasDynamicModel ? newModelField.dynamicModel(oldModelField.content) : newModelField.model) : (_oldModelField$conten = oldModelField === null || oldModelField === void 0 ? void 0 : oldModelField.content) !== null && _oldModelField$conten !== void 0 ? _oldModelField$conten : null;
+    });
+    return newModel;
+  }
+}
+// CONCATENATED MODULE: ./assets/js/models/Response.js
+
+class Response_Response extends Model_Model {
+  constructor(data_model) {
+    super();
+    this.ResponseCode = {
+      fieldName: 'code',
+      content: null
+    };
+    this.ResponseData = {
+      fieldName: 'data',
+      content: null
+    };
+    this.ResponseMessages = {
+      fieldName: 'messages',
+      content: null
+    };
+    if (data_model) this.ResponseData.model = data_model;
+  }
+  getResponseData() {
+    var _this$ResponseData;
+    return (_this$ResponseData = this.ResponseData) === null || _this$ResponseData === void 0 ? void 0 : _this$ResponseData.content;
+  }
+  getVisitId() {
+    var _this$getResponseData;
+    return (_this$getResponseData = this.getResponseData()) === null || _this$getResponseData === void 0 ? void 0 : _this$getResponseData['visit_id'];
+  }
+}
+/* harmony default export */ var models_Response = (Response_Response);
+
+/***/ }),
+/* 12 */
+/***/ (function(module, exports) {
+
+module.exports = require("vuex");
+
+/***/ }),
+/* 13 */
 /***/ (function(module, exports) {
 
 module.exports = require("vue-meta");
 
 /***/ }),
-/* 11 */
+/* 14 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1991,7 +2103,7 @@ var external_vue_ = __webpack_require__(1);
 var external_vue_default = /*#__PURE__*/__webpack_require__.n(external_vue_);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/util/console.js
-var console = __webpack_require__(5);
+var console = __webpack_require__(6);
 
 // CONCATENATED MODULE: ./node_modules/vuetify/lib/install.js
 
@@ -2059,7 +2171,7 @@ If you're seeing "$attrs is readonly", it's caused by this`);
   });
 }
 // EXTERNAL MODULE: ./node_modules/vuetify/src/styles/main.sass
-var main = __webpack_require__(29);
+var main = __webpack_require__(34);
 
 // CONCATENATED MODULE: ./node_modules/vuetify/lib/locale/en.js
 /* harmony default export */ var en = ({
@@ -2827,10 +2939,10 @@ class lang_Lang extends Service {
 }
 lang_Lang.property = 'lang';
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/util/colorUtils.js
-var colorUtils = __webpack_require__(6);
+var colorUtils = __webpack_require__(7);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/util/color/transformSRGB.js
-var transformSRGB = __webpack_require__(7);
+var transformSRGB = __webpack_require__(8);
 
 // CONCATENATED MODULE: ./node_modules/vuetify/lib/util/color/transformCIELAB.js
 const delta = 0.20689655172413793; // 6÷29
@@ -3242,19 +3354,25 @@ framework_Vuetify.config = {
 };
 
 /***/ }),
-/* 12 */
+/* 15 */
 /***/ (function(module, exports) {
 
 module.exports = require("axios");
 
 /***/ }),
-/* 13 */
+/* 16 */
+/***/ (function(module, exports) {
+
+module.exports = require("url");
+
+/***/ }),
+/* 17 */
 /***/ (function(module, exports) {
 
 module.exports = require("vue-no-ssr");
 
 /***/ }),
-/* 14 */
+/* 18 */
 /***/ (function(module, exports) {
 
 // nuxt/nuxt.js#8607
@@ -3285,31 +3403,31 @@ function wrapFunctional(options) {
 }
 
 /***/ }),
-/* 15 */
+/* 19 */
 /***/ (function(module, exports) {
 
 module.exports = require("cookie");
 
 /***/ }),
-/* 16 */
+/* 20 */
 /***/ (function(module, exports) {
 
 module.exports = require("vue-client-only");
 
 /***/ }),
-/* 17 */
+/* 21 */
 /***/ (function(module, exports) {
 
 module.exports = require("vue-router");
 
 /***/ }),
-/* 18 */
+/* 22 */
 /***/ (function(module, exports) {
 
 module.exports = require("vue-i18n");
 
 /***/ }),
-/* 19 */
+/* 23 */
 /***/ (function(module, exports) {
 
 // Exports
@@ -3319,19 +3437,128 @@ module.exports = {
 
 
 /***/ }),
-/* 20 */
-/***/ (function(module, exports) {
+/* 24 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-module.exports = require("url");
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* WEBPACK VAR INJECTION */(function(URL, URLSearchParams) {/* harmony import */ var _assets_js_mcn_helpers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(5);
+/* harmony import */ var _assets_js_models_Response__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(11);
+
+
+const sendApiRequest = function (context) {
+  var _i18n$locale;
+  let {
+    axios,
+    i18n,
+    store,
+    method,
+    uri,
+    data,
+    headers,
+    contentType,
+    onUploadProgress,
+    onDownloadProgress,
+    baseURL,
+    timeout,
+    raw,
+    foreignApi
+  } = context;
+  let url_obj = new URL([axios.defaults.baseURL, uri].join(''));
+  let url_search = new URLSearchParams(url_obj.search);
+  url_search.set('lang', (_i18n$locale = i18n.locale) !== null && _i18n$locale !== void 0 ? _i18n$locale : 'en');
+  let AxiosConfig = {
+    method,
+    url: [url_obj.pathname.replace(/^\/api/, ''), '?', url_search.toString()].join(''),
+    data: Object.assign({}, axios.defaults.data, data),
+    headers: Object.assign({}, axios.defaults.headers, headers)
+  };
+  AxiosConfig.data = Array.isArray(data) ? data.map(i => JSON.stringify(i)).reduce((pi, i) => Object.assign(pi, JSON.parse(i)), {}) : JSON.stringify(data);
+  if (onUploadProgress) AxiosConfig.onUploadProgress = onUploadProgress;
+  if (onDownloadProgress) AxiosConfig.onDownloadProgress = onDownloadProgress;
+  if (baseURL) AxiosConfig.baseURL = baseURL;
+  if (timeout) AxiosConfig.timeout = timeout;
+  return new ResponseManager(axios(AxiosConfig), context, foreignApi, raw);
+};
+function ResponseManager(httpClient, context, foreignApi = false, raw = false) {
+  let {
+    isAsync
+  } = context;
+  this.OnStart = start => {
+    Object(_assets_js_mcn_helpers__WEBPACK_IMPORTED_MODULE_0__[/* getType */ "a"])(start) === 'Function' ? start() : null;
+    return this;
+  };
+  this.OnSuccess = (success, model, loop = true) => {
+    httpClient.then(res => {
+      let response_data = res === null || res === void 0 ? void 0 : res.data;
+      let code = response_data === null || response_data === void 0 ? void 0 : response_data.code;
+      let data = foreignApi ? response_data : response_data === null || response_data === void 0 ? void 0 : response_data.data;
+      let message = response_data === null || response_data === void 0 ? void 0 : response_data.message;
+      code === 200 || foreignApi ? model ? Array.isArray(data) ? loop ? data.forEach(row => success(Object(_assets_js_mcn_helpers__WEBPACK_IMPORTED_MODULE_0__[/* serializeObject */ "e"])(row, model))) : success(data.map(row => Object(_assets_js_mcn_helpers__WEBPACK_IMPORTED_MODULE_0__[/* serializeObject */ "e"])(row, model))) : success(Object(_assets_js_mcn_helpers__WEBPACK_IMPORTED_MODULE_0__[/* serializeObject */ "e"])(data, model), message) : success(raw ? response_data : Object(_assets_js_mcn_helpers__WEBPACK_IMPORTED_MODULE_0__[/* serializeObject */ "e"])(response_data, _assets_js_models_Response__WEBPACK_IMPORTED_MODULE_1__[/* Response */ "a"]), message) : null;
+    });
+    return this;
+  };
+  this.OnFailure = failure => {
+    httpClient.then(res => {
+      var _res$data, _res$data2, _res$data3;
+      return ![401, 200, 501].includes(res === null || res === void 0 ? void 0 : (_res$data = res.data) === null || _res$data === void 0 ? void 0 : _res$data.code) && res !== null && res !== void 0 && (_res$data2 = res.data) !== null && _res$data2 !== void 0 && _res$data2.code ? failure(raw ? res === null || res === void 0 ? void 0 : res.data : res === null || res === void 0 ? void 0 : (_res$data3 = res.data) === null || _res$data3 === void 0 ? void 0 : _res$data3.messages) : null;
+    }).catch(err => failure(err));
+    return this;
+  };
+  this.OnValidationErrors = validation => {
+    httpClient.then(res => {
+      var _res$data4, _res$data5;
+      return (res === null || res === void 0 ? void 0 : (_res$data4 = res.data) === null || _res$data4 === void 0 ? void 0 : _res$data4.code) === 401 ? validation === null || validation === void 0 ? void 0 : validation(raw ? res === null || res === void 0 ? void 0 : res.data : res === null || res === void 0 ? void 0 : (_res$data5 = res.data) === null || _res$data5 === void 0 ? void 0 : _res$data5.messages) : null;
+    });
+    return this;
+  };
+  this.OnPaymentFailure = paymentFailure => {
+    httpClient.then(res => {
+      var _res$data6, _res$data7;
+      return (res === null || res === void 0 ? void 0 : (_res$data6 = res.data) === null || _res$data6 === void 0 ? void 0 : _res$data6.code) === 501 ? paymentFailure(raw ? res === null || res === void 0 ? void 0 : res.data : res === null || res === void 0 ? void 0 : (_res$data7 = res.data) === null || _res$data7 === void 0 ? void 0 : _res$data7.messages) : null;
+    }).catch(err => paymentFailure(err));
+    return this;
+  };
+  this.OnFinished = finished => {
+    httpClient.then(() => finished()).catch(() => finished());
+    return this;
+  };
+  if (isAsync) return this;
+  return new Promise((resolve, reject) => {
+    httpClient.then(res => {
+      var _context$data, _context$data2, _res$data8, _res$data9;
+      let dummy_res = {
+        code: 500,
+        data: [],
+        messages: 'Server failure.'
+      };
+      let model = context === null || context === void 0 ? void 0 : (_context$data = context.data) === null || _context$data === void 0 ? void 0 : _context$data.data_model;
+      let return_data_model = context === null || context === void 0 ? void 0 : (_context$data2 = context.data) === null || _context$data2 === void 0 ? void 0 : _context$data2.return_data;
+      let data = return_data_model ? res.data.data : res.data;
+      if (((_res$data8 = res.data) === null || _res$data8 === void 0 ? void 0 : _res$data8.code) === 200) resolve(Object(_assets_js_mcn_helpers__WEBPACK_IMPORTED_MODULE_0__[/* serializeObject */ "e"])(data, return_data_model ? new model() : new _assets_js_models_Response__WEBPACK_IMPORTED_MODULE_1__[/* Response */ "a"](model !== null && model !== void 0 ? model : null)));else if ((_res$data9 = res.data) !== null && _res$data9 !== void 0 && _res$data9.code) reject(Object(_assets_js_mcn_helpers__WEBPACK_IMPORTED_MODULE_0__[/* serializeObject */ "e"])(res.data, new _assets_js_models_Response__WEBPACK_IMPORTED_MODULE_1__[/* Response */ "a"]()));else reject(Object(_assets_js_mcn_helpers__WEBPACK_IMPORTED_MODULE_0__[/* serializeObject */ "e"])(dummy_res, new _assets_js_models_Response__WEBPACK_IMPORTED_MODULE_1__[/* Response */ "a"]()));
+    }).catch(err => {
+      let dummy_res = {
+        code: 500,
+        data: [],
+        messages: err.message
+      };
+      reject(Object(_assets_js_mcn_helpers__WEBPACK_IMPORTED_MODULE_0__[/* serializeObject */ "e"])(dummy_res, new _assets_js_models_Response__WEBPACK_IMPORTED_MODULE_1__[/* Response */ "a"]()));
+    });
+  });
+}
+/* harmony default export */ __webpack_exports__["default"] = ({
+  sendApiRequest
+});
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(16)["URL"], __webpack_require__(16)["URLSearchParams"]))
 
 /***/ }),
-/* 21 */
+/* 25 */
 /***/ (function(module, exports) {
 
 module.exports = require("node-fetch-native");
 
 /***/ }),
-/* 22 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3356,38 +3583,38 @@ function isHTTPS(req, trustProxy = true) {
 module.exports = isHTTPS;
 
 /***/ }),
-/* 23 */
+/* 27 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(URLSearchParams) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return nuxtI18nHead; });
-/* harmony import */ var core_js_modules_esnext_map_delete_all_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(31);
+/* harmony import */ var core_js_modules_esnext_map_delete_all_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(36);
 /* harmony import */ var core_js_modules_esnext_map_delete_all_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_esnext_map_delete_all_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var core_js_modules_esnext_map_every_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(32);
+/* harmony import */ var core_js_modules_esnext_map_every_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(37);
 /* harmony import */ var core_js_modules_esnext_map_every_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_esnext_map_every_js__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var core_js_modules_esnext_map_filter_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(33);
+/* harmony import */ var core_js_modules_esnext_map_filter_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(38);
 /* harmony import */ var core_js_modules_esnext_map_filter_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_esnext_map_filter_js__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var core_js_modules_esnext_map_find_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(34);
+/* harmony import */ var core_js_modules_esnext_map_find_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(39);
 /* harmony import */ var core_js_modules_esnext_map_find_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_esnext_map_find_js__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var core_js_modules_esnext_map_find_key_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(35);
+/* harmony import */ var core_js_modules_esnext_map_find_key_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(40);
 /* harmony import */ var core_js_modules_esnext_map_find_key_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_esnext_map_find_key_js__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var core_js_modules_esnext_map_includes_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(36);
+/* harmony import */ var core_js_modules_esnext_map_includes_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(41);
 /* harmony import */ var core_js_modules_esnext_map_includes_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_esnext_map_includes_js__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var core_js_modules_esnext_map_key_of_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(37);
+/* harmony import */ var core_js_modules_esnext_map_key_of_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(42);
 /* harmony import */ var core_js_modules_esnext_map_key_of_js__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_esnext_map_key_of_js__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var core_js_modules_esnext_map_map_keys_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(38);
+/* harmony import */ var core_js_modules_esnext_map_map_keys_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(43);
 /* harmony import */ var core_js_modules_esnext_map_map_keys_js__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_esnext_map_map_keys_js__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var core_js_modules_esnext_map_map_values_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(39);
+/* harmony import */ var core_js_modules_esnext_map_map_values_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(44);
 /* harmony import */ var core_js_modules_esnext_map_map_values_js__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_esnext_map_map_values_js__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var core_js_modules_esnext_map_merge_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(40);
+/* harmony import */ var core_js_modules_esnext_map_merge_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(45);
 /* harmony import */ var core_js_modules_esnext_map_merge_js__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_esnext_map_merge_js__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var core_js_modules_esnext_map_reduce_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(41);
+/* harmony import */ var core_js_modules_esnext_map_reduce_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(46);
 /* harmony import */ var core_js_modules_esnext_map_reduce_js__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_esnext_map_reduce_js__WEBPACK_IMPORTED_MODULE_10__);
-/* harmony import */ var core_js_modules_esnext_map_some_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(42);
+/* harmony import */ var core_js_modules_esnext_map_some_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(47);
 /* harmony import */ var core_js_modules_esnext_map_some_js__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_esnext_map_some_js__WEBPACK_IMPORTED_MODULE_11__);
-/* harmony import */ var core_js_modules_esnext_map_update_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(43);
+/* harmony import */ var core_js_modules_esnext_map_update_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(48);
 /* harmony import */ var core_js_modules_esnext_map_update_js__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_esnext_map_update_js__WEBPACK_IMPORTED_MODULE_12__);
-/* harmony import */ var vue_meta__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(10);
+/* harmony import */ var vue_meta__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(13);
 /* harmony import */ var vue_meta__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(vue_meta__WEBPACK_IMPORTED_MODULE_13__);
 /* harmony import */ var _options__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(0);
 /* harmony import */ var _utils_common__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(3);
@@ -3613,24 +3840,24 @@ function nuxtI18nHead({
   }
   return metaObject;
 }
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(20)["URLSearchParams"]))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(16)["URLSearchParams"]))
 
 /***/ }),
-/* 24 */
+/* 28 */
 /***/ (function(module, exports) {
 
 module.exports = require("defu");
 
 /***/ }),
-/* 25 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(26);
-module.exports = __webpack_require__(44);
+__webpack_require__(30);
+module.exports = __webpack_require__(49);
 
 
 /***/ }),
-/* 26 */
+/* 30 */
 /***/ (function(module, exports) {
 
 global.installComponents = function (component, components) {
@@ -3674,122 +3901,158 @@ function provideFunctionalComponents(component, components) {
 
 
 /***/ }),
-/* 27 */
+/* 31 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_nuxt_loading_vue_vue_type_style_index_0_id_b64bf7b2_prod_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(19);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_nuxt_loading_vue_vue_type_style_index_0_id_b64bf7b2_prod_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(23);
 /* harmony import */ var _node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_nuxt_loading_vue_vue_type_style_index_0_id_b64bf7b2_prod_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_nuxt_loading_vue_vue_type_style_index_0_id_b64bf7b2_prod_lang_css___WEBPACK_IMPORTED_MODULE_0__);
 /* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_nuxt_loading_vue_vue_type_style_index_0_id_b64bf7b2_prod_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_0_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_nuxt_loading_vue_vue_type_style_index_0_id_b64bf7b2_prod_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
 
 
 /***/ }),
-/* 28 */
-/***/ (function(module, exports) {
-
-// Exports
-module.exports = {
-
-};
-
-
-/***/ }),
-/* 29 */
-/***/ (function(module, exports) {
-
-// Exports
-module.exports = {
-
-};
-
-
-/***/ }),
-/* 30 */
-/***/ (function(module, exports) {
-
-module.exports = require("js-cookie");
-
-/***/ }),
-/* 31 */
-/***/ (function(module, exports) {
-
-module.exports = require("core-js/modules/esnext.map.delete-all.js");
-
-/***/ }),
 /* 32 */
 /***/ (function(module, exports) {
 
-module.exports = require("core-js/modules/esnext.map.every.js");
+// Exports
+module.exports = {
+
+};
+
 
 /***/ }),
 /* 33 */
-/***/ (function(module, exports) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-module.exports = require("core-js/modules/esnext.map.filter.js");
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "state", function() { return state; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "mutations", function() { return mutations; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "actions", function() { return actions; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getters", function() { return getters; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "strict", function() { return strict; });
+/* harmony import */ var _helpers_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(24);
+
+const state = () => ({
+  savedData: {
+    orders: [],
+    sale_page_referrer_id: null,
+    sale_page_pt: null,
+    click_query: {},
+    client_language: null,
+    client_country: null
+  },
+  pageAddOns: null,
+  client_location: null,
+  domain: null
+});
+const mutations = {};
+const actions = {
+  /*  SendRequest({commit, state}, payload = null) {
+      if (!payload.test) payload.headers = {'Authorization': `Bearer ${state.savedData.token}`}
+      return repository.sendApiRequest({i18n: this.$i18n, axios: this.$mcnApi, commit, state, ...payload})
+    },*/
+};
+const getters = {};
+const strict = false;
 
 /***/ }),
 /* 34 */
 /***/ (function(module, exports) {
 
-module.exports = require("core-js/modules/esnext.map.find.js");
+// Exports
+module.exports = {
+
+};
+
 
 /***/ }),
 /* 35 */
 /***/ (function(module, exports) {
 
-module.exports = require("core-js/modules/esnext.map.find-key.js");
+module.exports = require("js-cookie");
 
 /***/ }),
 /* 36 */
 /***/ (function(module, exports) {
 
-module.exports = require("core-js/modules/esnext.map.includes.js");
+module.exports = require("core-js/modules/esnext.map.delete-all.js");
 
 /***/ }),
 /* 37 */
 /***/ (function(module, exports) {
 
-module.exports = require("core-js/modules/esnext.map.key-of.js");
+module.exports = require("core-js/modules/esnext.map.every.js");
 
 /***/ }),
 /* 38 */
 /***/ (function(module, exports) {
 
-module.exports = require("core-js/modules/esnext.map.map-keys.js");
+module.exports = require("core-js/modules/esnext.map.filter.js");
 
 /***/ }),
 /* 39 */
 /***/ (function(module, exports) {
 
-module.exports = require("core-js/modules/esnext.map.map-values.js");
+module.exports = require("core-js/modules/esnext.map.find.js");
 
 /***/ }),
 /* 40 */
 /***/ (function(module, exports) {
 
-module.exports = require("core-js/modules/esnext.map.merge.js");
+module.exports = require("core-js/modules/esnext.map.find-key.js");
 
 /***/ }),
 /* 41 */
 /***/ (function(module, exports) {
 
-module.exports = require("core-js/modules/esnext.map.reduce.js");
+module.exports = require("core-js/modules/esnext.map.includes.js");
 
 /***/ }),
 /* 42 */
 /***/ (function(module, exports) {
 
-module.exports = require("core-js/modules/esnext.map.some.js");
+module.exports = require("core-js/modules/esnext.map.key-of.js");
 
 /***/ }),
 /* 43 */
 /***/ (function(module, exports) {
 
-module.exports = require("core-js/modules/esnext.map.update.js");
+module.exports = require("core-js/modules/esnext.map.map-keys.js");
 
 /***/ }),
 /* 44 */
+/***/ (function(module, exports) {
+
+module.exports = require("core-js/modules/esnext.map.map-values.js");
+
+/***/ }),
+/* 45 */
+/***/ (function(module, exports) {
+
+module.exports = require("core-js/modules/esnext.map.merge.js");
+
+/***/ }),
+/* 46 */
+/***/ (function(module, exports) {
+
+module.exports = require("core-js/modules/esnext.map.reduce.js");
+
+/***/ }),
+/* 47 */
+/***/ (function(module, exports) {
+
+module.exports = require("core-js/modules/esnext.map.some.js");
+
+/***/ }),
+/* 48 */
+/***/ (function(module, exports) {
+
+module.exports = require("core-js/modules/esnext.map.update.js");
+
+/***/ }),
+/* 49 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3804,7 +4067,7 @@ var external_vue_default = /*#__PURE__*/__webpack_require__.n(external_vue_);
 var external_ufo_ = __webpack_require__(4);
 
 // EXTERNAL MODULE: external "node-fetch-native"
-var external_node_fetch_native_ = __webpack_require__(21);
+var external_node_fetch_native_ = __webpack_require__(25);
 var external_node_fetch_native_default = /*#__PURE__*/__webpack_require__.n(external_node_fetch_native_);
 
 // CONCATENATED MODULE: ./.nuxt/middleware.js
@@ -3983,6 +4246,7 @@ async function setContext(app, context) {
       isDev: false,
       isHMR: false,
       app,
+      store: app.store,
       payload: context.payload,
       error: context.error,
       base: app.router.options.base,
@@ -4421,20 +4685,24 @@ async function serverPrefetch() {
     addLifecycleHook(this, 'serverPrefetch', serverPrefetch);
   }
 });
+// EXTERNAL MODULE: external "vuex"
+var external_vuex_ = __webpack_require__(12);
+var external_vuex_default = /*#__PURE__*/__webpack_require__.n(external_vuex_);
+
 // EXTERNAL MODULE: external "vue-meta"
-var external_vue_meta_ = __webpack_require__(10);
+var external_vue_meta_ = __webpack_require__(13);
 var external_vue_meta_default = /*#__PURE__*/__webpack_require__.n(external_vue_meta_);
 
 // EXTERNAL MODULE: external "vue-client-only"
-var external_vue_client_only_ = __webpack_require__(16);
+var external_vue_client_only_ = __webpack_require__(20);
 var external_vue_client_only_default = /*#__PURE__*/__webpack_require__.n(external_vue_client_only_);
 
 // EXTERNAL MODULE: external "vue-no-ssr"
-var external_vue_no_ssr_ = __webpack_require__(13);
+var external_vue_no_ssr_ = __webpack_require__(17);
 var external_vue_no_ssr_default = /*#__PURE__*/__webpack_require__.n(external_vue_no_ssr_);
 
 // EXTERNAL MODULE: external "vue-router"
-var external_vue_router_ = __webpack_require__(17);
+var external_vue_router_ = __webpack_require__(21);
 var external_vue_router_default = /*#__PURE__*/__webpack_require__.n(external_vue_router_);
 
 // CONCATENATED MODULE: ./.nuxt/router.scrollBehavior.js
@@ -4515,7 +4783,7 @@ function shouldScrollToTop(route) {
 
 
 
-const _4e57e194 = () => interopDefault(__webpack_require__.e(/* import() | pages/index */ 1).then(__webpack_require__.bind(null, 58)));
+const _4e57e194 = () => interopDefault(__webpack_require__.e(/* import() | pages/index */ 1).then(__webpack_require__.bind(null, 63)));
 
 const emptyFn = () => {};
 external_vue_default.a.use(external_vue_router_default.a);
@@ -4647,7 +4915,7 @@ var staticRenderFns = [];
 // CONCATENATED MODULE: ./layouts/error.vue?vue&type=script&lang=js&
  /* harmony default export */ var layouts_errorvue_type_script_lang_js_ = (errorvue_type_script_lang_js_); 
 // EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
-var componentNormalizer = __webpack_require__(9);
+var componentNormalizer = __webpack_require__(10);
 
 // CONCATENATED MODULE: ./layouts/error.vue
 
@@ -4918,7 +5186,7 @@ var nuxt_loading_render, nuxt_loading_staticRenderFns
 
 function nuxt_loading_injectStyles (context) {
   
-  var style0 = __webpack_require__(27)
+  var style0 = __webpack_require__(31)
 if (style0.__inject__) style0.__inject__(context)
 
 }
@@ -4938,7 +5206,7 @@ var nuxt_loading_component = Object(componentNormalizer["a" /* default */])(
 
 /* harmony default export */ var nuxt_loading = (nuxt_loading_component.exports);
 // EXTERNAL MODULE: ./assets/css/main.css
-var main = __webpack_require__(28);
+var main = __webpack_require__(32);
 
 // CONCATENATED MODULE: ./node_modules/vuetify-loader/lib/loader.js??ref--4!./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--7!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./layouts/default.vue?vue&type=template&id=4ef0529e&
 var defaultvue_type_template_id_4ef0529e_render = function render() {
@@ -5135,8 +5403,121 @@ const layouts = {
     NuxtLoading: nuxt_loading
   }
 });
+// CONCATENATED MODULE: ./.nuxt/store.js
+
+
+external_vue_default.a.use(external_vuex_default.a);
+const VUEX_PROPERTIES = ['state', 'getters', 'actions', 'mutations'];
+let store_store = {};
+(function updateModules() {
+  // If store is an exported method = classic mode (deprecated)
+
+  // Enforce store modules
+  store_store.modules = store_store.modules || {};
+  resolveStoreModules(__webpack_require__(33), 'salePage.js');
+  resolveStoreModules(__webpack_require__(24), 'helpers/actions.js');
+
+  // If the environment supports hot reloading...
+})();
+
+// createStore
+const createStore = store_store instanceof Function ? store_store : () => {
+  return new external_vuex_default.a.Store(Object.assign({
+    strict: "production" !== 'production'
+  }, store_store));
+};
+function normalizeRoot(moduleData, filePath) {
+  moduleData = moduleData.default || moduleData;
+  if (moduleData.commit) {
+    throw new Error(`[nuxt] ${filePath} should export a method that returns a Vuex instance.`);
+  }
+  if (typeof moduleData !== 'function') {
+    // Avoid TypeError: setting a property that has only a getter when overwriting top level keys
+    moduleData = Object.assign({}, moduleData);
+  }
+  return normalizeModule(moduleData, filePath);
+}
+function normalizeModule(moduleData, filePath) {
+  if (moduleData.state && typeof moduleData.state !== 'function') {
+    console.warn(`'state' should be a method that returns an object in ${filePath}`);
+    const state = Object.assign({}, moduleData.state);
+    // Avoid TypeError: setting a property that has only a getter when overwriting top level keys
+    moduleData = Object.assign({}, moduleData, {
+      state: () => state
+    });
+  }
+  return moduleData;
+}
+function resolveStoreModules(moduleData, filename) {
+  moduleData = moduleData.default || moduleData;
+  // Remove store src + extension (./foo/index.js -> foo/index)
+  const namespace = filename.replace(/\.(js|mjs)$/, '');
+  const namespaces = namespace.split('/');
+  let moduleName = namespaces[namespaces.length - 1];
+  const filePath = `store/${filename}`;
+  moduleData = moduleName === 'state' ? normalizeState(moduleData, filePath) : normalizeModule(moduleData, filePath);
+
+  // If src is a known Vuex property
+  if (VUEX_PROPERTIES.includes(moduleName)) {
+    const property = moduleName;
+    const propertyStoreModule = getStoreModule(store_store, namespaces, {
+      isProperty: true
+    });
+
+    // Replace state since it's a function
+    mergeProperty(propertyStoreModule, moduleData, property);
+    return;
+  }
+
+  // If file is foo/index.js, it should be saved as foo
+  const isIndexModule = moduleName === 'index';
+  if (isIndexModule) {
+    namespaces.pop();
+    moduleName = namespaces[namespaces.length - 1];
+  }
+  const storeModule = getStoreModule(store_store, namespaces);
+  for (const property of VUEX_PROPERTIES) {
+    mergeProperty(storeModule, moduleData[property], property);
+  }
+  if (moduleData.namespaced === false) {
+    delete storeModule.namespaced;
+  }
+}
+function normalizeState(moduleData, filePath) {
+  if (typeof moduleData !== 'function') {
+    console.warn(`${filePath} should export a method that returns an object`);
+    const state = Object.assign({}, moduleData);
+    return () => state;
+  }
+  return normalizeModule(moduleData, filePath);
+}
+function getStoreModule(storeModule, namespaces, {
+  isProperty = false
+} = {}) {
+  // If ./mutations.js
+  if (!namespaces.length || isProperty && namespaces.length === 1) {
+    return storeModule;
+  }
+  const namespace = namespaces.shift();
+  storeModule.modules[namespace] = storeModule.modules[namespace] || {};
+  storeModule.modules[namespace].namespaced = true;
+  storeModule.modules[namespace].modules = storeModule.modules[namespace].modules || {};
+  return getStoreModule(storeModule.modules[namespace], namespaces, {
+    isProperty
+  });
+}
+function mergeProperty(storeModule, moduleData, property) {
+  if (!moduleData) {
+    return;
+  }
+  if (property === 'state') {
+    storeModule.state = moduleData || storeModule.state;
+  } else {
+    storeModule[property] = Object.assign({}, storeModule[property], moduleData);
+  }
+}
 // EXTERNAL MODULE: ./.nuxt/components/index.js
-var components = __webpack_require__(14);
+var components = __webpack_require__(18);
 
 // CONCATENATED MODULE: ./.nuxt/components/plugin.js
 
@@ -5146,7 +5527,7 @@ for (const name in components) {
   external_vue_default.a.component('Lazy' + name, components[name]);
 }
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/framework.js + 22 modules
-var framework = __webpack_require__(11);
+var framework = __webpack_require__(14);
 
 // CONCATENATED MODULE: ./.nuxt/vuetify/options.js
 /* harmony default export */ var vuetify_options = ({
@@ -5181,11 +5562,11 @@ external_vue_default.a.use(framework["a" /* default */], {});
   ctx.$vuetify = vuetify.framework;
 });
 // EXTERNAL MODULE: ./node_modules/is-https/dist/index.js
-var dist = __webpack_require__(22);
+var dist = __webpack_require__(26);
 var dist_default = /*#__PURE__*/__webpack_require__.n(dist);
 
 // EXTERNAL MODULE: ./node_modules/@nuxtjs/i18n/node_modules/ufo/dist/index.cjs
-var ufo_dist = __webpack_require__(8);
+var ufo_dist = __webpack_require__(9);
 
 // EXTERNAL MODULE: ./.nuxt/nuxt-i18n/options.js
 var nuxt_i18n_options = __webpack_require__(0);
@@ -5688,7 +6069,7 @@ const plugin_routing_plugin = {
   }
 });
 // EXTERNAL MODULE: external "vue-i18n"
-var external_vue_i18n_ = __webpack_require__(18);
+var external_vue_i18n_ = __webpack_require__(22);
 var external_vue_i18n_default = /*#__PURE__*/__webpack_require__.n(external_vue_i18n_);
 
 // CONCATENATED MODULE: ./node_modules/klona/full/index.mjs
@@ -5747,7 +6128,7 @@ function klona(x) {
 }
 
 // EXTERNAL MODULE: ./.nuxt/nuxt-i18n/head-meta.js
-var head_meta = __webpack_require__(23);
+var head_meta = __webpack_require__(27);
 
 // CONCATENATED MODULE: ./.nuxt/nuxt-i18n/plugin.main.js
 
@@ -5778,7 +6159,7 @@ external_vue_default.a.use(external_vue_i18n_default.a);
   } = nuxt_i18n_options["c" /* options */];
   const injectInNuxtState = lazy && (lazy === true || lazy.skipNuxtState !== true);
   if ( true && injectInNuxtState) {
-    const devalue = (await Promise.resolve(/* import() */).then(__webpack_require__.t.bind(null, 48, 7))).default;
+    const devalue = (await Promise.resolve(/* import() */).then(__webpack_require__.t.bind(null, 53, 7))).default;
     context.beforeNuxtRender(({
       nuxtState
     }) => {
@@ -6111,11 +6492,11 @@ external_vue_default.a.use(external_vue_i18n_default.a);
   if (false) {}
 });
 // EXTERNAL MODULE: external "axios"
-var external_axios_ = __webpack_require__(12);
+var external_axios_ = __webpack_require__(15);
 var external_axios_default = /*#__PURE__*/__webpack_require__.n(external_axios_);
 
 // EXTERNAL MODULE: external "defu"
-var external_defu_ = __webpack_require__(24);
+var external_defu_ = __webpack_require__(28);
 var external_defu_default = /*#__PURE__*/__webpack_require__.n(external_defu_);
 
 // CONCATENATED MODULE: ./.nuxt/axios.js
@@ -6312,6 +6693,8 @@ const setupProgress = axios => {
 
 
 
+
+
 /* Plugins */
 
  // Source: .\\components\\plugin.js (mode: 'all')
@@ -6363,11 +6746,25 @@ const defaultTransition = {
   "appearActiveClass": "appear-active",
   "appearToClass": "appear-to"
 };
+const originalRegisterModule = external_vuex_default.a.Store.prototype.registerModule;
+function registerModule(path, rawModule, options = {}) {
+  const preserveState =  false && (false);
+  return originalRegisterModule.call(this, path, rawModule, {
+    preserveState,
+    ...options
+  });
+}
 async function createApp(ssrContext, config = {}) {
-  const store = null;
+  const store = createStore(ssrContext);
   const router = await createRouter(ssrContext, config, {
     store
   });
+
+  // Add this.$router into store actions/mutations
+  store.$router = router;
+
+  // Fix SSR caveat https://github.com/nuxt/nuxt.js/issues/3757#issuecomment-414689141
+  store.registerModule = registerModule;
 
   // Create Root instance
 
@@ -6397,6 +6794,7 @@ async function createApp(ssrContext, config = {}) {
       "style": [],
       "script": []
     },
+    store,
     router,
     nuxt: {
       defaultTransition,
@@ -6441,6 +6839,9 @@ async function createApp(ssrContext, config = {}) {
     },
     ...App
   };
+
+  // Make app available into store via this.app
+  store.app = app;
   const next = ssrContext ? ssrContext.next : location => app.router.push(location);
   // Resolve route
   let route;
@@ -6453,6 +6854,7 @@ async function createApp(ssrContext, config = {}) {
 
   // Set context to app.context
   await setContext(app, {
+    store,
     route,
     next,
     error: app.nuxt.error.bind(app),
@@ -6478,6 +6880,9 @@ async function createApp(ssrContext, config = {}) {
       app.context[key] = value;
     }
 
+    // Add into store
+    store[key] = app[key];
+
     // Check if plugin not already installed
     const installKey = '__nuxt_' + key + '_installed__';
     if (external_vue_default.a[installKey]) {
@@ -6498,6 +6903,7 @@ async function createApp(ssrContext, config = {}) {
 
   // Inject runtime config as $config
   inject('config', config);
+  if (false) {}
 
   // Add enablePreview(previewData = {}) in context for plugins
   if (false) {}
@@ -6548,6 +6954,7 @@ async function createApp(ssrContext, config = {}) {
     });
   });
   return {
+    store,
     app,
     router
   };
@@ -6644,6 +7051,7 @@ const createNext = ssrContext => opts => {
     data: [],
     fetch: {},
     error: null,
+    state: null,
     serverRendered: true,
     routePath: ''
   };
@@ -6659,7 +7067,8 @@ const createNext = ssrContext => opts => {
   // Create the app definition and the instance (created for each request)
   const {
     app,
-    router
+    router,
+    store
   } = await createApp(ssrContext, ssrContext.runtimeConfig.private);
   const _app = new external_vue_default.a(app);
   // Add ssr route path to nuxt context so we can account for page navigation between ssr and csr
@@ -6679,6 +7088,9 @@ const createNext = ssrContext => opts => {
     ssrContext.rendered = () => {
       // Call beforeSerialize() hooks
       ssrContext.beforeSerializeFns.forEach(fn => fn(ssrContext.nuxt));
+
+      // Add the state from the vuex store
+      ssrContext.nuxt.state = store.state;
     };
   };
   const renderErrorPage = async () => {
@@ -6707,6 +7119,25 @@ const createNext = ssrContext => opts => {
 
   // Components are already resolved by setContext -> getRouteData (app/utils.js)
   const Components = getMatchedComponents(app.context.route);
+
+  /*
+  ** Dispatch store nuxtServerInit
+  */
+  if (store._actions && store._actions.nuxtServerInit) {
+    try {
+      await store.dispatch('nuxtServerInit', app.context);
+    } catch (err) {
+      console.debug('Error occurred when calling nuxtServerInit: ', err.message);
+      throw err;
+    }
+  }
+  // ...If there is a redirect or an error, stop the process
+  if (ssrContext.redirected) {
+    return noopApp();
+  }
+  if (ssrContext.nuxt.error) {
+    return renderErrorPage();
+  }
 
   /*
   ** Call global middleware (nuxt.config.js)
@@ -6858,15 +7289,15 @@ const createNext = ssrContext => opts => {
 });
 
 /***/ }),
-/* 45 */
+/* 50 */
 /***/ (function(module, exports) {
 
 module.exports = require("@mdi/js");
 
 /***/ }),
-/* 46 */,
-/* 47 */,
-/* 48 */
+/* 51 */,
+/* 52 */,
+/* 53 */
 /***/ (function(module, exports) {
 
 module.exports = require("devalue");
