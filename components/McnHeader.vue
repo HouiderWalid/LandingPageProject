@@ -8,9 +8,9 @@
         <a :style="{maxWidth: isMdAndDown ? '70%' : 'auto'}" class="d-flex align-items-center" href="/"
            style="min-height: 80px; align-items: center">
           <!--            <nuxt-img provider="cloudfront" src="/images/users/avatar-roma_n8B79X4wPwc8qS6H.png"/>-->
-          <McnImage :image="domainLogoImage" :src="domainLogoImageUrl" height="50px"
+<!--          <McnImage :image="domainLogoImage" :src="domainLogoImageUrl" height="50px"
                     image-max-width="150px"
-                    image-radius width="auto"/>
+                    image-radius width="auto"/>-->
         </a>
         <v-row :style="toggleStyle" align="center" class="mcn-menu flex-grow-0 overflow-hidden"
                justify="center" no-gutters style="transition: .5s; align-items: center">
