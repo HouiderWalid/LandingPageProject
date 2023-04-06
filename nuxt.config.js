@@ -122,7 +122,7 @@ export default {
     extractCSS: {
       ignoreOrder: true
     },
-    optimization: {
+/*    optimization: {
       minimize: true,
       splitChunks: {
         chunks: 'all',
@@ -138,6 +138,6 @@ export default {
           }
         }
       }
-    }
+    }*/
   }
 }
