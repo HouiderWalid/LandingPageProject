@@ -6681,6 +6681,54 @@ const setupProgress = axios => {
   ctx.$axios = axios;
   inject('axios', axios);
 });
+// CONCATENATED MODULE: ./assets/js/environment.js
+function getVariables(host_name = null) {
+  let variables = {};
+  if (false) {}
+  switch (true) {
+    case /localhost/.test(host_name):
+      variables.API = 'http://mcn-apis.test/api/';
+      variables.REDIS_HOST = '127.0.0.1';
+      variables.REDIS_DB = 0;
+      variables.PAGE_DEFAULT_DOMAIN = 'localhost';
+      break;
+    case /^dev\..*/.test(host_name):
+      variables.API = 'https://dev-api.maxcom.network/api/';
+      variables.REDIS_HOST = 'elasicach-redis.tx8ln5.ng.0001.usw2.cache.amazonaws.com';
+      variables.REDIS_DB = 6; // dev takes dbs from 6 and above
+      variables.PAGE_DEFAULT_DOMAIN = 'dev.maxcomoffers.com';
+      break;
+    default:
+      variables.API = 'https://api.maxcom.network/api/';
+      variables.REDIS_HOST = 'elasicach-redis.tx8ln5.ng.0001.usw2.cache.amazonaws.com';
+      variables.REDIS_DB = 0; // prod takes from 5 and below
+      variables.PAGE_DEFAULT_DOMAIN = 'maxcomshop.com';
+  }
+  return variables;
+}
+// CONCATENATED MODULE: ./plugins/axios.js
+
+/* harmony default export */ var plugins_axios = (function ({
+  $axios,
+  req
+}, inject) {
+  var _exec, _req$headers;
+  let host_name = (_exec = /^(?:https?:\/\/)?(?:[^@\/\n]+@)?(?:www\.)?([^:\/?\n]+)/.exec(req === null || req === void 0 ? void 0 : (_req$headers = req.headers) === null || _req$headers === void 0 ? void 0 : _req$headers.host)) === null || _exec === void 0 ? void 0 : _exec[1];
+  let api_url = getVariables(host_name).API;
+  const api = $axios.create({
+    baseURL: api_url,
+    timeout: 60000,
+    headers: {
+      "content-type": "application/json",
+      "accept": "application/json"
+      //"content-type": "multipart/form-data",
+      //'X-CSRF-TOKEN': document.querySelector("meta[name='csrf-token']").content
+    },
+
+    responseType: "json"
+  });
+  inject('mcnApi', api);
+});
 // CONCATENATED MODULE: ./.nuxt/index.js
 
 
@@ -6703,6 +6751,7 @@ const setupProgress = axios => {
  // Source: .\\nuxt-i18n\\plugin.routing.js (mode: 'all')
  // Source: .\\nuxt-i18n\\plugin.main.js (mode: 'all')
  // Source: .\\axios.js (mode: 'all')
+ // Source: ..\\plugins\\axios (mode: 'all')
 
 // Component: <ClientOnly>
 external_vue_default.a.component(external_vue_client_only_default.a.name, external_vue_client_only_default.a);
@@ -6926,6 +6975,9 @@ async function createApp(ssrContext, config = {}) {
   }
   if (typeof _nuxt_axios === 'function') {
     await _nuxt_axios(app.context, inject);
+  }
+  if (typeof plugins_axios === 'function') {
+    await plugins_axios(app.context, inject);
   }
 
   // Lock enablePreview in context
