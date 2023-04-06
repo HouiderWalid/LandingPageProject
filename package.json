@@ -18,6 +18,7 @@
     "vuex-persistedstate": "^4.1.0"
   },
   "devDependencies": {
+    "@mdi/js": "^7.2.96",
     "@nuxt/image": "^0.7.1",
     "@nuxtjs/google-fonts": "^2.0.0",
     "@nuxtjs/vuetify": "^1.12.1",
