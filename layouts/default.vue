@@ -2,7 +2,7 @@
   <v-app :style="{ '--d-secondary-color': getSecondaryColor, '--d-primary-color': conicBgColor }"
          class="position-relative" style="min-height: 100vh; background-color: rgb(246, 246, 246)">
 
-    <McnHeader/>
+<!--    <McnHeader/>-->
 
     <div class="flex-grow-1" style="min-height: 1px">
       <Nuxt/>

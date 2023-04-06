@@ -54,13 +54,13 @@ var VBtn = __webpack_require__(78);
 var VIcon = __webpack_require__(89);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/mixins/binds-attrs/index.js
-var binds_attrs = __webpack_require__(33);
+var binds_attrs = __webpack_require__(32);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/mixins/colorable/index.js
 var colorable = __webpack_require__(14);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/mixins/sizeable/index.js
-var sizeable = __webpack_require__(47);
+var sizeable = __webpack_require__(46);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/mixins/themeable/index.js
 var themeable = __webpack_require__(13);
@@ -287,7 +287,7 @@ const VIcon_VIcon = Object(mixins["a" /* default */])(binds_attrs["a" /* default
 
 /* harmony default export */ var components_VIcon = (components_VIcon_VIcon);
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/mixins/toggleable/index.js
-var toggleable = __webpack_require__(48);
+var toggleable = __webpack_require__(47);
 
 // CONCATENATED MODULE: ./node_modules/vuetify/lib/mixins/transitionable/index.js
 
