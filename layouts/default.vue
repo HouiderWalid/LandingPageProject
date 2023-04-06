@@ -14,13 +14,13 @@
 
 <script>
 
-import {hexToRgb} from "../assets/js/mcn-helpers";
+//import {hexToRgb} from "../assets/js/mcn-helpers";
 import McnHeader from "../components/McnHeader";
 
 export default {
   components: {McnHeader},
   computed: {
-    domain() {
+/*    domain() {
       return this.$store.getters["salePage/getDomain"]
     },
     getSecondaryColor() {
@@ -31,7 +31,7 @@ export default {
     },
     conicBgColor() {
       return Object.values(hexToRgb(this.primaryColor) ?? {}).join()
-    },
+    },*/
   }
 }
 </script>
